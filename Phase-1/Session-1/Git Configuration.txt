@@ -1,0 +1,37 @@
+Download Git
+
+install with default installation steps
+
+create account on Git Hub
+
+create new Repository
+
+give name , description select public and create
+
+-------------------------------------------------------
+go to your folder which ypou want to upload on github
+repository
+
+open the same from cmd
+
+execute below mentioned command
+
+git init
+
+git config --global user.email "give your email ID"
+
+git add README.md
+
+git add .
+
+git commit -m "first commit"
+
+git branch -M main
+
+git remote add origin https://github.com/sonam-niit/Java-Evening-8-11.git
+
+git push -u origin main
+
+it will prompt browser login- give loginid, password 
+
+(this will push you code on git hub repository)
