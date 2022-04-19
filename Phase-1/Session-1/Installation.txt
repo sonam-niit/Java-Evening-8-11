@@ -1,0 +1,26 @@
+install JDK
+
+download it from drive link
+
+https://drive.google.com/drive/folders/197LA7GTVJBsCKnsWV4HNOK1N83hrlBxY
+
+install --> open cmd and check version
+
+>java -version
+
+download and install eclipse IDE for Enterpice JAVA....
+
+-------------------------------------------------
+Premitive Datatypes
+
+byte - 1 byte
+short --2 byte
+int -- whole number -- 4 byte
+long  -- 8 byte
+float -- fractional number -- 4 byte
+double -- 8 byte
+char -- 2 bytes -- store characters
+boolean -- 1 bit (0 false, 1 true)
+
+
+

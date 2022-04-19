@@ -1,0 +1,474 @@
+JAVA
+----------------------------
+Programming Language
+
+what is program?
+----------------------------
+set of instruction, execute them the complete a certain Task.
+
+why program?
+-----------------------------
+things which you can't do manually to do that we required program.
+
+to make life easy.
+
+How to do Program?
+---------------------
+unnderstand computer
+give some command to your computer
+so computer will do work for you.
+
+Compiler
+
+code(something like english) ---> compiler (understandable by machine) --> run
+
+
+
+JDK: JAVA Development KIT
+
+install JDK
+--------------------------------------------------
+install eclipse
+
+click on eclipse --> it will ask you to select workspace
+--> click on browse --> you can create new folder in any drive which you want --> select that
+--> open
+
+---------------------------------------------------------------------------------
+file ---> new ---> other --> search for JAVA Project --> Select JAVA Project
+
+----> next --> Give the Project Name ---> FirstProject --> uncheck on createModuleInfo.java file
+
+---> next ---> Finish --> for very firsttime (click on open perspective)
+
+expand your project --> you can see src folder and JRE system librray folder in your project
+---------------------------------------------------------------------------------------------
+
+to work with the project we need to create a class
+class when we create it will store in default package (but use default package is a bad practice)
+
+cretae your own package
+
+what is package?
+-----------------------------------------
+seprate your code in diffrent folders 
+java also have some ready packages which we can use by importing them (taking their permission)
+
+java.util (where all the classes provided for utility like Date, time, calender etc)
+java.io (where all classes provided for input output processes to work with files like text file)
+java.lang (default - no need to import)
+
+************************************************************************
+right click on src --> new --> package --> give package name(you can give any name)
+
+but you should follow start with com or org followed by organization name follwed by any projectname or any topic name
+(package name always be in lowercase)
+example: com.simplilearn.test
+	 com.simplilearn.sample
+(if you want later you can change the name of package by refractoring the same)
+*********************************************************************************
+
+create class
+
+right click on package --> new --> class --> give name (any name)
+
+rules to create a className
+---------------------------------
+firstlettr Shold captital
+
+if you have multiple words name then each word first letter should be capital
+example: HelloWorld
+
+no special characters allowed (.,&*/ space etc) onln _, $ allowed
+
+give name and finish
+-----------------------------------------------------------------------------------------
+increase font size in eclipse
+
+windows ---> preference ---> expand general ---> expand apperance ---> click on color and fonts
+
+----> expand basic ---> double click on text font --> change size --> ok ---> apply --> apply and close
+
+
+Let's create Main method in class
+----------------------------------------------
+
+public static void main(String args[]){
+       here we will write our code
+}
+
+
+public : code can access from everywhere
+static: this is going to call by JVM
+void : mean this method will not return avything
+main: methods name
+String: sequence of characters
+args[] : array (which we will learn later)
+{}  : where you can add a block code
+
+when you run your program JVM will search for this syntax (main method)
+
+this is the starting point of executing a program
+
+--------------------------------------------------------------------------------
+
+to get an output I want to print some thing
+
+how to Print
+
+System.out.println(); // inside whetever you will give your JVM will print
+
+-----------------------------------------------------------------------------------
+
+create Below metioned code and see output
+------------------------------------------------
+package com.simplilearn.sample;
+
+public class HelloWorld {
+
+	public static void main(String args[]) {
+		
+		System.out.println("Hello World");
+		System.out.println(23);
+		System.out.println(34+56);
+		System.out.println('H');
+		System.out.println(true);
+		
+	}
+}
+
+****************************************************************************
+Declare variable and print them
+---------------------------------------------------
+package com.simplilearn.sample;
+
+public class Datatype {
+
+	public static void main(String[] args) {
+		
+		byte a=10;
+		short b=20;
+		int c= 34567;
+		long d= 890986734;
+		float e=34.5f;
+		double f= 4589.899;
+		char g= 'S';
+		boolean h=false;
+		
+		System.out.println("byte value= "+ a);
+		System.out.println("short value= "+ b); //string concatation
+		System.out.println(c);  //do it by your self
+		System.out.println(d);
+		System.out.println(e);
+		System.out.println(f);
+		System.out.println(g);
+		System.out.println(h);
+	}
+}
+
+***************************************************************************
+operators used to do operations
+
+Arithmatic operator +, -, *, /, % (get the reminder)
+
+Comparison Operator: < , > , <= , >=, == (equal) , != (not equal)
+
+Logical Operatot: to combine the conditions &&(AND), || (OR) , ! (not)
+
+Assignment operator: to assign a value: = 
+	ex. a=20 means assign 20 to variable a
+	    x=y ; means store value of y into x
+
+if I say x == y
+means check whether x and y are equals or not
+
+*****************************************************************************
+
+package com.simplilearn.sample;
+
+public class Operators {
+
+	public static void main(String[] args) {
+		
+		int a=20;
+		int b=30;
+		
+		System.out.println("Result "+ (a+b));
+		
+		int sub= a-b;
+		System.out.println("Subtraction= "+sub);
+		
+	}
+}
+
+________________________________________________________________________________
+
+1. Write a program to do multiplication and divison of 2 numbers
+2. Write a program to calculate square and cube of given number;
+	(Hint: int sqr= n * n; int cube= n*n*n;)
+
+3. Write a program to calculate Simple Intrest
+	(Hint: float intrest= (p * r * n) /100)
+
+__________________________________________________________________________________
+
+do the condition check
+
+what if the condition true?
+
+what if the condition false?
+
+we can use if and else
+
+if(condition)
+{
+	//if condition true then this block execute
+}
+else{
+	//if condition false then this block will execute
+}
+*******************************************************************************
+package com.simplilearn.sample;
+
+public class IfElse {
+
+	public static void main(String[] args) {
+		
+		int age=6;
+		
+		if(age>=18)
+		{
+			System.out.println("Congratulations.. you can vote");
+		}
+		else {
+			System.out.println("Sorry you are not eligible");
+		}
+	}
+}
+
+________________________________________________________________________________________
+
+4. Write a program to compare 2 number and print the larger one
+5. Write a program to find out the given number is even or odd.
+	(Hint: if(num%2 == 0) even else ODD )
+________________________________________________________________________________________
+
+Now with If I can give only one condition
+
+what if I want to check multiple conditions then?
+
+i CAN USE THE if else-if ladder
+-----------------------------------------------
+package com.simplilearn.sample;
+
+public class ElseIfLadder {
+
+	public static void main(String[] args) {
+		
+		int num=3;
+		
+		if(num==1){
+			System.out.println("Today is Sunday");
+		}
+		else if(num==2) {
+			System.out.println("Today is Monday");
+		}
+		else if(num==3) {
+			System.out.println("Today is Tuesday");
+		}
+		else if(num==4) {
+			System.out.println("Today is WednesDay");
+		}
+		else if(num==5) {
+			System.out.println("Today is Thursday");
+		}
+		else if(num==6) {
+			System.out.println("Today is Friday");
+		}
+		else if(num==7) {
+			System.out.println("Today is Saturday");
+		}
+		else {
+			System.out.println("Enter proper number");
+		}
+	}
+}
+
+____________________________________________________________________________________
+we can also use Switch Case to jump to any number
+
+package com.simplilearn.sample;
+
+public class SwitchCaseDemo {
+
+	public static void main(String[] args) {
+		
+		int num=5;
+		
+		switch (num) {
+		case 1: System.out.println("Today is Sunday"); break;
+		case 2: System.out.println("Today is Monday"); break;
+		case 3: System.out.println("Today is Tuesday"); break;
+		case 4: System.out.println("Today is WednesDay"); break;
+		case 5: System.out.println("Today is Thursday"); break;
+		case 6: System.out.println("Today is Friday"); break;
+		case 7: System.out.println("Today is Saturday"); break;
+		
+		default:
+			System.out.println("Enter Proper Number");
+		}
+	}
+}
+
+________________________________________________________________________________________
+repeat the same task multiple times
+
+Loops: iterative statements
+
+while
+----------------
+
+while(condition)
+{
+	//code
+}
+
+means the untill the condition become false the code will execute repetedly
+
+do{
+	//code
+}
+while(condition);
+
+
+for(initialization;condition;increment)
+{
+	//code
+}
+
+__________________________________________________________________________________________
+
+
+package com.simplilearn.loops;
+
+public class WhileDemo {
+
+	public static void main(String[] args) {
+		
+		int i=1;
+		
+		while(i<=10)
+		{
+			System.out.println(i);
+			i++; // i = i +1 increase the value of i by 1
+		}
+		
+		System.out.println("Loop completed");
+	}
+}
+
+******************************************************************************
+package com.simplilearn.loops;
+
+public class DoWhileLoop {
+
+	public static void main(String[] args) {
+		
+		int i=1;
+		do {
+			System.out.println(i);
+			i++;
+		}
+		while(i<=10);
+		
+		System.out.println("Loop completed");
+	}
+}
+*********************************************************************************
+package com.simplilearn.loops;
+
+public class For {
+
+	public static void main(String[] args) {
+		
+		for(int i=1; i<=10; i++) {
+			System.out.println(i);
+		}
+		
+		System.out.println("Loop completed");
+	}
+}
+
+__________________________________________________________________________________________
+
+5. Write a program to print first 50 even numbers using for loop.
+6. write a program to print first 50 odd numbers using while loop
+
+__________________________________________________________________________________________
+use of Break in loop
+-------------------------------------
+package com.simplilearn.loops;
+
+public class For {
+
+	public static void main(String[] args) {
+		
+		for(int i=1; i<=10; i++) {
+			
+			if(i==5)
+				break;
+			System.out.println(i);
+		}
+		
+		System.out.println("Loop completed");
+	}
+}
+//we can use break to terminate the loop
+________________________________________________________________________________________
+
+
+use of continue
+----------------------------------------------------
+package com.simplilearn.loops;
+
+public class For {
+
+	public static void main(String[] args) {
+		
+		for(int i=1; i<=10; i++) {
+			
+			if(i==6)
+				continue;
+			System.out.println(i);
+		}
+		
+		System.out.println("Loop completed");
+	}
+}
+//we can use continue to skip some value in loop
+
+**********************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
