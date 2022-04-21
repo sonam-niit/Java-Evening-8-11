@@ -1,0 +1,528 @@
+Class and Object
+_____________________________________
+
+package com.simplilearn.oops;
+
+public class Pen {
+
+	//variables
+	String brandName; //class level variable
+	String color;
+	String type;
+	float price;
+	
+	//constructor
+	public Pen(String brandName, String color, String type, float price) {
+		this.brandName = brandName;
+		this.color = color;
+		this.type = type;
+		this.price = price;
+	}
+	
+	//simple methods
+	public void print() {
+		System.out.println(brandName+" "+color+" "+type+" "+price);
+	}
+	public void open() {
+		System.out.println("Pen Opened");
+	}
+	public void close() {
+		System.out.println("Pen closed");
+	}
+	//Parameterized method
+	public void write(String msg) {
+		System.out.println("Written: "+ msg);
+	}
+	
+}
+
+_________________________________________________________________________________________________
+
+package com.simplilearn.oops;
+
+public class UsePenClass {
+
+	public static void main(String[] args) {
+		
+		Pen p1= new Pen("Cello", "Blue", "BallPen", 20);
+		Pen p2= new Pen("Montex", "Red", "GellPen", 30);
+		
+		p1.open();
+		p2.open();
+		p1.write("Hello User");
+		p2.write("Welcome");
+		p1.print();
+		p2.print();
+		
+		p1.close();
+		p2.close();
+	}
+}
+_________________________________________________________________________________________________
+
+4 pillers we have in Object oriented Programming
+
+1. encapsulation
+2. Inheritance
+3. Abstraction
+4. Polymorphism
+
+_________________________________________________________________________________________________
+1.Encaptulation
+__________________________________________________
+
+hinding the data from use of its direct access
+
+obj.num1 or obj.num2 (this is called direct access)
+
+
+1. create all variables as a private.
+2. Access them using get and set methods (we will wrap our data with methods that is called encaptulation)
+
+example
+----------------------------------
+package com.simplilearn.oops;
+
+public class Employee {
+
+	private int empCode;
+	private String empName;
+	private float empSalary;
+	
+	public int getEmpCode() {
+		return empCode;
+	}
+	public void setEmpCode(int empCode) {
+		this.empCode = empCode;
+	}
+	public String getEmpName() {
+		return empName;
+	}
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+	public float getEmpSalary() {
+		return empSalary;
+	}
+	public void setEmpSalary(float empSalary) {
+		this.empSalary = empSalary;
+	}
+	
+	//get method always return a value
+	//Set method always void and has one parameter to set
+	
+	public static void main(String[] args) {
+		Employee e1= new Employee();
+		e1.setEmpCode(23);
+		e1.setEmpName("Sonam Soni");
+		e1.setEmpSalary(34567);
+		
+		System.out.println(e1.getEmpCode()+"\n"+e1.getEmpName()+"\n"+e1.getEmpSalary());
+	}
+}
+
+========================================================================================
+to hide data,we use private ....but if it is private ,it can't be accessed by everyone ....so in order to make it accessible to everyone without showing the data  or say we hide the data by enscapulation
+_________________________________________________________________________________________________
+
+Inheritance
+-------------------------------------------------------------------------------------------
+inherit the properties
+means if you inherit a class means you can access all the properties of that class except private
+properties.
+
+Inherited class -- Super class -- Parent Class -- Base class
+
+Derived class -- Sub class -- Child class 
+
+to reuse the propereties of  previously created class.
+__________________________________________________________________________________________________
+
+
+create a parent class
+
+package com.simplilearn.inheritance;
+
+public class Parent {
+
+	protected String name="Sonam Soni";
+	
+	public Parent() {
+		System.out.println("This is Parent Constructor");
+	}
+	
+}
+
+
+create a Child class
+
+
+package com.simplilearn.inheritance;
+
+public class Child extends Parent{
+
+	public Child(){
+		//super();
+		System.out.println("This is Child Constructor");
+	}
+	
+	public void print() {
+		System.out.println("My name is "+name);
+	}
+	
+	public static void main(String[] args) {
+		
+		Child c= new Child(); //idea for constructor calling
+		c.print();
+	}
+}
+
+_________________________________________________________________________________________
+when you create an object of child class it will call child class constructor but from child class constructor first of all it will call super() means parent class constructor
+
+child can access protected and public property from parent class anywhere
+child can access default property only in same package
+
+child can not access private property of parent class
+____________________________________________________________________________________________
+
+we can also implement multilevel inheritance means child can access father's property and father can access grandfather's property so indirecly child can also access grandfather's property.
+
+class GP{
+	
+}
+
+class P extends GP{
+
+}
+
+class C extends P{
+
+}
+
+C c= new C();
+_____________________________________________________________________________________________
+
+Multiple inheritance is not Possible in JAVA
+
+means one can can extends only one class not more than that
+
+class A extends B,C{
+}
+
+this will give compile time error
+
+______________________________________________________________________________________________
+
+We can create Interface
+
+what is interface?
+
+interface is a structure of a class
+
+where you can just provide a design but no Implementation.
+
+Create Interface Car
+
+package com.simplilearn.inheritance;
+
+public interface Car {
+
+	//all methods of interface are abstract
+	//what is abstract? just design no code
+	
+	public void start();
+	public void stop();
+}
+
+
+Implemented interface in class BMW
+
+package com.simplilearn.inheritance;
+
+public class BMW implements Car{
+
+	public void start() {
+		System.out.println("BMW started");
+	}
+	public void stop() {
+		System.out.println("BMW stopped");
+	}
+}
+
+
+Implemented the interface in class TATA
+
+package com.simplilearn.inheritance;
+
+package com.simplilearn.inheritance;
+
+public class TATA implements Car{
+
+	public void start() {
+		System.out.println("TATA started");
+	}
+	public void stop() {
+		System.out.println("TATA stopped");
+	}
+}
+
+
+Created diffrent models of diffrent brands
+
+package com.simplilearn.inheritance;
+
+public class TestCar {
+
+	public static void main(String[] args) {
+		
+		BMW model1= new BMW();
+		TATA altroz = new TATA();
+		
+		model1.start();
+		altroz.start();
+		
+		model1.stop();
+		altroz.stop();
+	}
+}
+
+*******************************************************************************************
+
+Solution for multiple Inheritance (Diamond Problem)
+
+package com.simplilearn.multiple;
+
+public interface Bank {
+
+	String address="Mumbai";
+	
+	String getAddress();
+}
+
+
+package com.simplilearn.multiple;
+
+public interface Account {
+
+	public void diposit();
+	public void withdraw();
+	
+	String getAddress();
+}
+
+
+package com.simplilearn.multiple;
+
+public class CurrentAccount implements Bank,Account{
+
+	public void diposit() {
+		System.out.println("Money Diposited");
+		
+	}
+	public void withdraw() {
+		System.out.println("Money withdrawn");
+	}
+	
+	public String getAddress() {
+		return address;
+	}
+
+}
+
+
+	package com.simplilearn.multiple;
+	
+	public class Main {
+	
+		public static void main(String[] args) {
+			CurrentAccount c1=new CurrentAccount();
+			
+			c1.withdraw();
+			c1.diposit();
+			System.out.println(c1.getAddress());
+		}
+	}
+
+_________________________________________________________________________________________________
+
+
+class can extends class (but only one)
+
+class can implements interface ( many)
+
+interface can extends interface (only one)
+
+_______________________________________________________________________________________________
+
+if class implements interface then compsary class has to implement all methods of that interface
+
+if you can't then your class  become Abstract class
+
+What is abstarct?
+
+class which methods are not implemented (means abstarct)
+
+we can not create object of abstract class
+
+_____________________________________________________________________________________________
+
+package com.simplilearn.inheritance;
+
+public interface Car {
+
+	//all methods of interface are abstract
+	//what is abstract? just design no code
+	
+	public void start();
+	public void stop();
+	public void changeGear();
+	
+}
+
+
+package com.simplilearn.inheritance;
+
+public abstract  class TATA implements Car{
+
+	public void start() {
+		System.out.println("TATA started");
+	}
+	public void stop() {
+		System.out.println("TATA stopped");
+	}
+	
+	public abstract void changeGear(); // no implementation
+}
+
+
+package com.simplilearn.inheritance;
+
+public class Altroz extends TATA {
+
+	
+	public void changeGear() {
+		System.out.println("Gear changed");	
+	}
+	
+	public static void main(String[] args) {
+		
+		Altroz a= new Altroz();
+		a.start();
+		a.changeGear();
+		a.stop();
+	}
+
+}
+
+
+__________________________________________________________________________
+
+Car is interface
+TATA is Abstract Class
+Altroz is Concreate class ( class having all implemented methods - whose object you can create)
+_________________________________________________________________________________________________
+
+When we are working with multiple classes we can create relationship between class
+
+these Relationship is called as Assosiation
+
+which is divided in 2 parts: Aggregation and composition
+
+Aggregation: one Student can have one Address (weak relationship means if you delete student then it will not harm with the address object)
+
+----> Book and author (if you delete book author is not going to delete)
+
+Composision: one house can have many doors (but if you close main door automatically others doors are going to close-- inner doors are depedent on outer door)
+
+**************************************************************************************************
+
+Polymorphism -- poly (Many) and morph(form)
+
+many forms
+
+-------------------------------------------------------------------
+same things i can use in many forms
+
+1. Static Polymorphism (Method overloading -- Compile time Polymorphism -- early binding)
+2. Dynamic Polymorphism (Method Overiding -- run time Polymorphism -- late binding)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
