@@ -1,167 +1,218 @@
-********Write Up:
-word file
-mention your project details
+Polymorphism
+_________________________________________
+Samme thing can be used in many forms
 
-what you understood
+here we are using this in the form of methods
 
-the logics which you have implemented in your project
+1. Compiletime polymorphism(static polymormism/ early binding/ method overloading)
+_______________________________________________________________________________________
 
-what are the diffrent topics of java you have implemented in your programm you need to explain.
+same method name we can reuse multiple times
 
-*****Source Code:
+same method name 
+parameters must be diffrent (diffrent in the form of datatypes)
+in the same class
 
-Create a word and copy and paste all the codes which you have created.
+return type doen't matter here.
 
-*********Screenshot
+______________________________________________________________________________________
 
-create word file and submit output screenshot of your application.
-	provide dirrent output screenshots
-
-************Additional Remarks:
-extra things write that
-add github link of your project
-
-______________________________________________________________________________________________
-Inner class
-(nested class , class inside a class)
-
-to implement security
-___________________________________________
 package com.simplilearn.polymorphism;
 
-public class Outer {
+public class MethodOverloading {
 
-	public int a=20;
-	private String key="Secret";
-	
-	class Inner{
-		
-		void display() {
-			System.out.println("Value "+a);
-			System.out.println("Key "+key);
-		}
+	public int add(int a,int b) {
+		return a+b;
+	}
+	public float add(float a,float b) {
+		return a+b;
+	}
+	public double add (double a,int b) {
+		return a+b;
+	}
+	public int add(int a,int b, int c) {
+		return a+b+c;
 	}
 	
-	
 	public static void main(String[] args) {
-		Outer outerObject= new Outer(); //outside class object
-		Outer.Inner innerObject= outerObject.new Inner();
-		//use outsideClass Object to create Inner class object
+		MethodOverloading m= new MethodOverloading();
 		
-		innerObject.display(); //call inner class method
+		System.out.println(m.add(23, 56));
+		System.out.println(m.add(6.0, 89));
+		System.out.println(m.add(5.9f, 89.0f));
+		System.out.println(m.add(4, 8, 9));
 	}
 }
 
+_______________________________________________________________________________________
+
+2. Runtime polymorphism (late binding, dynamic polymorphism/ method overriding)
+
+(when inheritance implemented then only method overiding needs to be take care)
+
+same method name 
+same parameter
+but one method is in parent class and another method is in child class
+
+when child is having same method which father has then child will override the fathers method and will use its own method.
+
+
+package com.simplilearn.polymorphism;
+
+public class Parent {
+
+	public void mobile() {
+		System.out.println("Calling teacher from fathers phone");
+	}
+}
+
+
+package com.simplilearn.polymorphism;
+
+public class Child extends Parent{
+
+	public void mobile() {
+		//super.mobile(); //to call explicitly fathers mobile method
+		System.out.println("Calling teacher from Own phone");
+	}
+	
+	public static void main(String[] args) {
+		
+		Child c= new Child();
+		c.mobile(); //child will override parent mobile method
+	}
+}
+__________________________________________________________________________________________
+
+Array: sequence of similar types of data
+----------------------------------------------------
+
+array index always start from 0
+
+array size is fixed when we will declare it at that time we need to define
 ________________________________________________________________________________
 
-you can also write a class in any block (in method, if block, else block,loop)
+Single Dimentional Array
+________________________________________
+package com.simplilearn.polymorphism;
 
-which is called as LocalInnerClass.
+public class SDArray {
 
+	public static void main(String[] args) {
+		
+		int a[]= new int[5]; //one way
+		//index numbers 0-4
+		
+		a[0]=10;
+		a[1]=20;
+		a[2]=30;
+		a[3]=40;
+		a[4]=50;
+		
+		System.out.println("Print element at index 3 "+a[3]);
+		
+		//foreach enhanced for loop
+		for(int x:a) {
+			System.out.print(x+", ");
+		}
+		
+		String fruits[]= {"apple","banana","pineapple","mango"};
+		
+		//print all elements
+		System.out.println("Length of array "+fruits.length);
+		for(int i=0;i<fruits.length;i++) {
+			System.out.print(fruits[i]+ ", ");
+		}
+	}
+}
+___________________________________________________________________________________________________
 
-Perticularly If you write a class Inside a method It is called as a methodLocalInnerClass
-___________________________________________________________________________________________
+Multi dimentional Array
+____________________________________________________________
+package com.simplilearn.polymorphism;
+
+public class TwoDimeArray {
+
+	public static void main(String[] args) {
+		
+		int a[][]= {{1,2},{3,4},{5,6}}; //3 rows and 2 columns
+		
+		System.out.println("2nd row 2nd column: "+a[1][1]);
+		
+		System.out.println("Print full array");
+		
+		for(int row=0;row<3;row++) {
+			
+			for(int col=0;col<2;col++) {
+				System.out.print(a[row][col] +"         ");
+			}
+			
+			System.out.println();
+		}
+	}
+}
+______________________________________________________________________________________________
+
+Regex: Regular Expression
+
+basically required to validate the String inputs
+
+example we can validate email, password , mobile etc.
+
+_____________________________________________________________________________
+package com.simplilearn.polymorphism;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexDemo {
+
+	public static void main(String[] args) {
+		
+		String regex="[a-z]+";
+		
+		String input="sonam";
+		
+		Pattern p= Pattern.compile(regex);
+		Matcher m= p.matcher(input);
+		
+		if(m.matches())
+			System.out.println("pattern matched");
+		else
+			System.out.println("Not matched");
+		
+	}
+}
+
+__________________________________________________________________________________
 
 package com.simplilearn.polymorphism;
 
-public class MethodLocalInnerClass {
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-	public void display() {
-		
-		class Inner {
-			
-			int a=10;
-			void test() {
-				if(a==10)
-					System.out.println("Valid");
-				else
-					System.out.println("Not valid");
-			}
-		}
-		
-		//we can use this class here only(inside a method)
-		Inner i=new Inner();
-		i.test();
-	}
-	
-	
-	public static void main(String[] args) {
-		MethodLocalInnerClass obj= new MethodLocalInnerClass();
-		obj.display();
-	}
-}
-
-________________________________________________________________________________________
-
-Annonymous InnerClass
-
-a class without its Name which is called annonymous Inner class.
-
-package com.simplilearn.inheritance;
-
-public interface Car {
-
-	//all methods of interface are abstract
-	//what is abstract? just design no code
-	
-	public void start();
-	public void stop();
-	public void changeGear();
-	
-}
-
-
-package com.simplilearn.inheritance;
-
-//Basic Implementation
-public class Altroz implements Car {
-
-	public void stop() {
-		System.out.println("Altroz Stopped");
-	}
-	public void start() {
-		System.out.println("Altroz Started");
-	}
-	public void changeGear() {
-		System.out.println("Altroz Gear Changed");
-	}
-	
-
-}
-
-
-package com.simplilearn.inheritance;
-
-public class Demo {
+public class RegexDemo {
 
 	public static void main(String[] args) {
 		
-		//Annonymous Implementation
-		Car suv= new Car() {
-			public void stop() {
-				System.out.println("SUV Stopped");
-			}
-			public void start() {
-				System.out.println("SUV Started");
-			}
-			public void changeGear() {
-				System.out.println("SUV Gear Changed");
-			}
-		};
+		String regex="[987]{3}[0-9]{7}";
 		
-		suv.start();
-		suv.stop();
-		suv.changeGear();
-		//SUV is a single object where using altroz name I can create multiple objects
+		String input="9676893025";
 		
-		Altroz a=new Altroz();
-		Altroz b= new Altroz();
-		Altroz c= new Altroz();
+		Pattern p= Pattern.compile(regex);
+		Matcher m= p.matcher(input);
 		
-		//to use them you just need to use this objects and call the methods
+		if(m.matches())
+			System.out.println("Valid mobile number");
+		else
+			System.out.println("Not Valid Mobile Number");
+		
 	}
 }
+_____________________________________________________________________________________
 
 
-____________________________________________________________________________________________________
-Note: Car object created using annonymous implementation
+
+
+
+
