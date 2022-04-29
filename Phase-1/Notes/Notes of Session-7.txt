@@ -1,0 +1,331 @@
+Multithreading
+_______________________________________________________________________
+
+creating a multiple threads and run them in parellel.
+
+to create threads we can use thread class or we use Runnable Interface
+______________________________________________________________________________
+package com.simplilearn.multithreading;
+
+public class ThreadDemo1 extends Thread{
+
+	public void run() {
+		System.out.println(Thread.currentThread().getName()+" Thread Started");
+	}
+	
+	public static void main(String[] args) {
+		
+		ThreadDemo1 t1= new ThreadDemo1();
+		ThreadDemo1 t2= new ThreadDemo1();
+		t1.start();
+		t2.start();
+	}
+}
+
+___________________________________________________________________________________________
+package com.simplilearn.multithreading;
+
+public class ThreadDemo2 implements Runnable{
+
+	@Override
+	public void run() {
+		System.out.println("Thread Started");
+	}
+	
+	public static void main(String[] args) {
+		
+		ThreadDemo2 target1= new ThreadDemo2();
+		Thread t1= new Thread(target1); //passing runnable target in constructor
+		t1.start();
+		ThreadDemo2 target2= new ThreadDemo2();
+		Thread t2= new Thread(target2);
+		t2.start();
+		
+	}
+
+}
+____________________________________________________________________________________________
+
+Let's Understand two threads are runnig in Parellel
+_______________________________________________________________________________________________
+package com.simplilearn.multithreading;
+
+public class ThreadDemo2 implements Runnable{
+
+	@Override
+	public void run(){
+		
+		for(int i=0;i<5;i++)
+		{
+			System.out.println(Thread.currentThread().getName()+ " "+i);
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+		ThreadDemo2 target1= new ThreadDemo2();
+		Thread t1= new Thread(target1);
+		t1.setName("One");
+		t1.start();
+		ThreadDemo2 target2= new ThreadDemo2();
+		Thread t2= new Thread(target2);
+		t2.setName("two");
+		t2.start();
+		
+	}
+
+}
+
+________________________________________________________________________________________________
+
+Use of main thread as well as other threads
+
+package com.simplilearn.multithreading;
+
+public class ThreadDemo3 implements Runnable{
+
+	static int count=0;
+	public void run() {
+	
+		while(count<=10) {
+			System.out.println("This is my Thread "+ ++count);
+			
+			try {
+				Thread.sleep(1000);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+		//created my thread named m and started it
+		ThreadDemo3 target= new ThreadDemo3();
+		Thread m= new Thread(target);
+		m.start();
+		
+		//main is also one thread
+		while(count<=10) {
+			System.out.println("This is main Thread "+ ++count);
+			
+			try {
+				Thread.sleep(1000);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+}
+____________________________________________________________________________________________
+
+Explanation of wait method
+
+package com.simplilearn.multithreading;
+
+public class WaitDemo {
+
+	private static Object myObject = new Object();
+
+	public static void main(String[] args) throws InterruptedException {
+
+		synchronized (myObject) {
+			int i;
+			for (i = 0; i < 5; i++) {
+				System.out.println("Product "+i+"produced");
+			}
+
+			myObject.wait(3000);
+			
+			System.out.println("Thread wokeup after wait of 3 seconds");
+			for (i = 0; i < 5; i++) {
+				System.out.println("Product "+i+" producing");
+			}
+			
+			
+		}
+	}
+}
+
+___________________________________________________________________________________________________
+
+Synchronization In JAVA
+
+when there is a single object shared by multiple threads we have to use synchronization.
+
+(Sender class object we want to access one at a time as it is not a sharable object)
+package com.simp.sync;
+
+public class Sender {
+
+	public void send(String name,String message) {
+		System.out.println(name +" sending a message "+ message);
+		
+		try {
+			Thread.sleep(2000);
+			
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(name+ " message send successfully");
+	}
+}
+
+___________________________________________________________________________________________________
+package com.simp.sync;
+
+public class User extends Thread {
+
+	private String name;
+	private String msg;
+	private Sender sender;
+	
+	
+	public User(String name, String msg, Sender sender) {
+		this.name = name;
+		this.msg = msg;
+		this.sender = sender;
+	}
+
+	public void run() {
+		
+		synchronized (sender) {
+			sender.send(name, msg);
+		}
+		
+	}
+}
+
+______________________________________________________________________________________________________
+
+created a user class which is extending a thread class means when you create instance of user class actually you are creating threads.
+
+
+To use them create one class with main Method
+
+package com.simp.sync;
+
+public class TestSynchronization {
+
+	public static void main(String[] args) {
+		
+		Sender sender= new Sender(); //single object
+		
+		User user1= new User("Sonam", "Welcome to the world of JAVA", sender);
+		User user2= new User("Pankaj", "JAVA is beautiful", sender);
+		User user3= new User("Kamil", "need More time to learn", sender);
+		
+		
+		user1.start();
+		user2.start();
+		user3.start();
+		
+	}
+}
+________________________________________________________________________________________________
+
+when thread started, it will call run method and run method is having a synchronized block which is going to apply on any thread, means if it is applied to user1 then user one can access sender object and user2 and user3 has to wait.
+
+once the object released by user1 then user2 or user3 any one can access this object
+
+if it is locked by user3 then user2 has to wait.
+
+again when it is realeased user2 can access.
+
+_______________________________________________________________________________________________________
+
+Serialization 
+
+when we work with object --> the data which is there in object you can store in memory or in File (text,excel file) or can store in database
+
+
+if you store your object directly there may be a chances of leaking of data.
+
+if you use serialization you can convert your data while transfering from object to bytestream again when you want to access you can deserialize by converting then from bytestream to object.
+_________________________________________________________________________________________
+
+package checkedexceptions;
+
+import java.io.Serializable;
+
+public class Student implements Serializable{
+
+	private int id;
+	private String name;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public static void main(String[] args) {
+		Student s1= new Student();
+		s1.setId(1);s1.setName("Sonam");
+		
+		System.out.println(s1.getId()+" "+s1.getName());
+	}
+	
+}
+_____________________________________________________________________________________________
+
+File Hanlding
+
+handling a file.
+
+why? to store and retrive the data from file.
+
+(file is a permanent storage)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

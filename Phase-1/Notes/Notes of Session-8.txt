@@ -1,0 +1,370 @@
+File Handling
+_____________________________
+
+we can create file by using File class
+
+we can also create file by using FileWriter and FileOutputStream.
+
+when you create object of filewriter or fileoutputstream it will check if the file available? then open it
+
+if the file is not available then create it.
+
+Using FileWriter we can write Data in the form of Strings (character array means String)
+
+Using FileOutputStream we can write data in the form of Streams (byte array)
+
+_____________________________________________________________________________________
+create File
+
+package com.simplilearn.file;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
+
+public class CreateNewFile {
+
+	public static void main(String[] args) {
+		try {
+			//createFileUsingFileClass();
+			//createFileUsingOutputStream();
+			createFileUsingNIO();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	static void createFileUsingFileClass() throws IOException{
+		
+		File myfile =new File("D:\\files\\file1.txt");
+		
+		if(myfile.createNewFile())
+			System.out.println("File created Successfully");
+		else
+			System.out.println("File is already Exist");
+		
+		//lets open the file and write the data in that file
+		FileWriter writer= new FileWriter(myfile,true);//append true
+		writer.write(" Hello everyone welcome to file Handling");
+		System.out.println("Data written successfully");
+		writer.close();
+	}
+	
+	static void createFileUsingOutputStream() throws IOException 
+	{
+		FileOutputStream out= new FileOutputStream("D:\\files\\file2.txt");
+		String data=" Hello everyone welcome to file Handling";
+		byte array[]= data.getBytes();
+		out.write(array); //write a data in file
+		System.out.println("Data Written");
+		out.close();
+	}
+	
+	//use some classes which are available in NIO
+	
+	static void createFileUsingNIO() throws IOException {
+		String data="Welcome";
+//		Path filePath= Paths.get("D:\\files\\file3.txt");
+//		Files.write(filePath, data.getBytes(), StandardOpenOption.CREATE);
+//		System.out.println("Data Written Successfully");
+		String list[]= {"This is my Line 1","This is my line2","this is my line 3"};
+		Files.write(Paths.get("D:\\files\\file4.txt"), Arrays.asList(list), StandardOpenOption.CREATE,
+				StandardOpenOption.APPEND);
+		
+		System.out.println("Data Written Successfully");
+	}
+	
+	
+	
+	
+	
+}
+_____________________________________________________________________________________________
+read file
+____________________
+
+package com.simplilearn.file;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class ReadFile {
+
+	public static void main(String[] args) throws IOException {
+		readFile();
+		//readFileWithInputStream();
+	}
+	
+	static void readFile() throws IOException {
+		
+		FileReader reader= new FileReader("D:\\files\\file1.txt");
+		char data[]= new char[200];
+		reader.read(data); //reading data in form of characters
+		System.out.println(data);
+	}
+	static void readFileWithInputStream() throws IOException {
+		
+		FileInputStream reader= new FileInputStream("D:\\files\\file1.txt");
+		int i;
+		//reading data in form of streams
+		while((i= reader.read())!=-1)
+		{
+			System.out.print((char)i);
+		}
+	}
+}
+
+___________________________________________________________________________________________
+package com.simplilearn.file;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class UpdateFile {
+
+	public static void main(String[] args) {
+		modifyFile("D://files//file4.txt", "line", "message");
+	}
+	
+	static void modifyFile(String filename, String olddata, String newdata) {
+		
+		File fileToModify= new File(filename);
+		String oldContent="";
+		BufferedReader reader= null;
+		FileWriter writer= null;
+		
+		try {
+			
+			reader= new BufferedReader(new FileReader(fileToModify));
+			String line= reader.readLine(); //read first line
+			while(line!=null) {
+				oldContent= oldContent+line+System.lineSeparator();
+				line= reader.readLine(); //read next line
+			}
+			
+			String newcontent= oldContent.replaceAll(olddata, newdata);
+			writer= new FileWriter(fileToModify);
+			writer.write(newcontent); //write the updated data to original file
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			
+			try {
+				reader.close();
+				writer.close();
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	}
+}
+_________________________________________________________________________________________________________
+
+package com.simplilearn.file;
+
+import java.io.IOException;
+import java.nio.file.DirectoryNotEmptyException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class DeleteFile {
+
+	public static void main(String[] args) {
+		
+		try {
+			Path myfile= Paths.get("D:\\files\\file1.txt");
+			if(Files.deleteIfExists(myfile))
+				System.out.println("File deleted Successfully");
+			else
+				System.out.println("File not exist");
+			
+		} 
+		catch (NoSuchFileException e) {
+			e.printStackTrace();
+		}
+		catch(DirectoryNotEmptyException e) {
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+____________________________________________________________________________________________________
+
+Collection is a framework
+
+provides list of interface and classes using that you can create dynamic set of DATA.
+
+
+List: collection of data
+      which can contain duplicates
+      folow the insertion order
+
+
+ArrayList                                 LinkedList                               Vector
+___________________________________________________________________________________________________
+
+implementation is similar              implementaion is similar like             older class      
+like array                             linkedlist data structure                 legacy class
+
+stores the values in indexes         storing the values like linkedlist          all methods are Synchronized
+
+for retrival: faster than LinkedList   for retrival:slower than arrayList        thread safe
+
+for manupulation: slower	       for manupulation: faster
+
+
+
+package com.simplilearn.collectionlist;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class ArrayListDemo {
+
+	public static void main(String[] args) {
+		
+		//datatypes class -- wrapper class int -- Integer, char -- Character, float-- Float
+		//byte -- Byte
+		ArrayList<Integer> list= new ArrayList<Integer>();
+		
+		list.add(10);
+		list.add(20);
+		list.add(30);
+		list.add(10); //allow duplicated
+		list.add(40);
+		
+		System.out.println(list);
+		
+		list.remove(3);
+		System.out.println("After Remove: "+list);
+		System.out.println("Size: "+list.size());
+		
+		list.add(3, 10);
+		System.out.println("After Add "+list);
+		System.out.println("Get element from index 4: "+ list.get(4));
+		
+		//Iterator to iterate with data
+		Iterator<Integer> retrive= list.iterator();
+		while(retrive.hasNext())
+		{
+			System.out.println(retrive.next());
+		}
+		
+		
+		
+	}
+}
+
+__________________________________________________________________________________________________
+package com.simplilearn.collectionlist;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+
+public class LinkedListDemo {
+
+	public static void main(String[] args) {
+		
+		LinkedList<Integer> list= new LinkedList<Integer>();
+		
+		list.add(10);
+		list.add(20);
+		list.add(30);
+		list.add(10); //allow duplicated
+		list.add(40);
+		
+		System.out.println(list);
+		
+		list.remove(3);
+		System.out.println("After Remove: "+list);
+		System.out.println("Size: "+list.size());
+		
+		list.add(3, 10);
+		System.out.println("After Add "+list);
+		System.out.println("Get element from index 4: "+ list.get(4));
+		
+		//Iterator to iterate with data
+		Iterator<Integer> retrive= list.iterator();
+		while(retrive.hasNext())
+		{
+			System.out.println(retrive.next());
+		}
+		
+		
+		
+	}
+}
+
+_____________________________________________________________________________________________________
+package com.simplilearn.collectionlist;
+
+import java.util.Iterator;
+import java.util.Vector;
+
+public class VectorDemo {
+
+	public static void main(String[] args) {
+		
+		Vector<Integer> list= new Vector<Integer>();
+		
+		list.add(10);
+		list.add(20);
+		list.add(30);
+		list.add(10); //allow duplicated
+		list.add(40);
+		
+		System.out.println(list);
+		
+		list.remove(3);
+		System.out.println("After Remove: "+list);
+		System.out.println("Size: "+list.size());
+		
+		list.add(3, 10);
+		System.out.println("After Add "+list);
+		System.out.println("Get element from index 4: "+ list.get(4));
+		
+		//Iterator to iterate with data
+		Iterator<Integer> retrive= list.iterator();
+		while(retrive.hasNext())
+		{
+			System.out.println(retrive.next());
+		}
+		
+		
+		
+	}
+}
+
+____________________________________________________________________________________________________
+
+
+
+
+
+
+
+
+

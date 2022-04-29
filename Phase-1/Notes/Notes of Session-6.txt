@@ -1,0 +1,394 @@
+//Email Validating and fetching from array..
+package com.simplilearn.polymorphism;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+public class EmailValidation {
+    
+    public static void main(String[] args) {
+        
+        String regex="[a-zA-Z0-9_]+[@][a-z]+[.][a-z]{2,3}";
+        Pattern p= Pattern.compile(regex);
+        String a[]=new String[3];
+        
+        Scanner v = new Scanner(System.in);
+        //take 3 emailId as input from user
+        for (int i = 0; i<3; i++)
+        {
+            System.out.println("Enter your email - ");
+            a[i] = v.nextLine();
+        }
+        
+        System.out.println("Array elements checking");
+        
+        for (int i = 0; i<3; i++)
+        {
+        	Matcher m= p.matcher(a[i]);
+        	if(m.matches())
+                System.out.println(a[i]+" Valid");
+            else
+                System.out.println(a[i]+" Not Valid");
+        }
+        
+        //Search Logic
+        
+        System.out.println("Enter any email to search");
+        String search=v.nextLine();
+        int i;
+        for (i = 0; i<3; i++)
+        {
+        	if(a[i].equals(search))
+        	{	
+        		System.out.println("Matching");
+        		break;
+        	}
+        	
+        }
+        if(i>3)
+        	System.out.println("Not found");
+    }
+}
+______________________________________________________________________________________________________
+
+Exception Handling
+
+We can only handle the exceptions but no errors( memory / hardware errors)
+
+unchecked Exception (runtime exception)
+-----------------------------------------------------
+if you will not handle them you will not get any compile time error, you will get run time error only when use give some wrong inputs.
+
+try and catch we can use to handle errors (terminate the program properly)
+
+try block you should wriote the code which can throw error
+
+in catch block catch the exception in perticular exception object and terminate program
+
+examples
+
+package uncheckedException;
+
+public class ExceptionDemo1 {
+
+	public static void main(String[] args) {
+		
+		int num1=10;
+		int num2=0;
+		try {
+			int div= num1/num2;//this line create error error is also an object
+			System.out.println("Division is "+div);
+		}
+		catch(Exception e) {
+			System.out.println("Error Occured "+e.getMessage());
+			e.printStackTrace();
+		}
+		
+		
+		System.out.println("Program Completed");
+	}
+}
+
+________________________________________________________________________________________________________
+package uncheckedException;
+
+public class ExceptionDemo2 {
+
+	public static void main(String[] args) {
+
+		String name = "s1234";
+		
+		try {
+			int number = Integer.parseInt(name);
+			System.out.println("Converted String " + number);
+			
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("Program Completed");
+
+	}
+}
+
+________________________________________________________________________________________________________
+package uncheckedException;
+
+public class ExceptionDemo3 {
+
+	public static void main(String[] args) {
+		
+		int a[]= new int[5];
+		
+		try {
+			a[0]=10;a[1]=20;a[2]=30;a[3]=40; a[4]=50;
+			a[5]=60;
+			
+			System.out.println("Element at index "+a[4]);
+		}
+		catch (ArrayIndexOutOfBoundsException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("Program Completed");
+	}
+}
+
+________________________________________________________________________________________________________
+package uncheckedException;
+
+public class ExceptionDemo4 {
+
+	public static void main(String[] args) {
+		
+		String name="Sonam";
+		
+		try {
+			
+			System.out.println("Length of name "+name.length());
+			int a=10/0;
+			System.out.println("Divison "+a);
+			
+		}
+		catch (NullPointerException e) {
+			System.out.println("NullPointer Excepion Occured");
+		}
+		catch (ArithmeticException e) {
+			System.out.println("Arithmetic Exception Occured");
+		}
+		catch(Exception e) {
+			System.out.println("Exception Occured");
+		}
+		
+	}
+}
+
+______________________________________________________________________________________________________
+Above example if for muctiple catch means if Nullpointer error throw then first catch will handle the error
+
+if arithmetic then second catch with handle the error
+
+if any other then 3rd catch will handle the error.
+
+Means general Exception you should keep at last.
+_____________________________________________________________________________________________________
+
+Checked Exception (Compile time Exception)
+
+they are already checked means you have to handle them otherwise they will throw compile time error and you won't be able to run your program.
+
+example: SQLException,IOException,FileNotFoundException, InturrptedException
+_________________________________________________________________________________
+
+package checkedexceptions;
+
+public class ExceptionDemo1 {
+
+	public static void main(String[] args) {
+		
+		try {
+			Thread.sleep(3000);
+		} 
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+____________________________________________________________________________________
+package checkedexceptions;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class ExceptionDemo2 {
+
+	public static void main(String[] args) {
+		
+		try {
+			FileWriter writer= new FileWriter("hello.txt");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+__________________________________________________________________________________________
+
+Finally Use
+---------------------------------------------------------------------------------
+there are some statement which you want to run wether error ocurred or not occured.
+
+
+finally block will execute with try block or catch block.
+
+finaly will execute everytime after try or catch.
+
+package uncheckedException;
+
+import java.util.Scanner;
+
+public class FinallyDemo {
+
+	public static void main(String[] args) {
+		
+		int num1,num2;
+		Scanner sc= new Scanner(System.in);
+		System.out.println("Enter any number");
+		num1=sc.nextInt();
+		num2=sc.nextInt();
+		try {
+			System.out.println("Divison "+(num1/num2));
+			
+		}
+		catch(Exception e) {
+			System.out.println("Error Occured "+e.getMessage());
+
+		}finally {
+			sc.close();
+			System.out.println("Scanner Closed");
+		}
+	}
+}
+
+_____________________________________________________________________________________________
+
+Use of finally: to write closing statement of open objects.
+
+____________________________________________________________________________________________________
+
+Throw and Throws
+
+throw: to whrow an exception
+
+means when you o divide by zero compiler will throw exception, when trying to access index which not available compiler wil throw exception but what if you want to throw some exception according to your condition.
+
+----> At that time you should use throw to throw an exception.
+
+----> you can throw compile exception, you can throw run time exception according to your requirement
+
+******** Throws ****************
+
+----> when you throw exception which is checked you can declare the same using throws keyword
+
+----> Using throws we can declare the exception
+----> write throws after the method ()--- (paranthesis bracket)
+
+_____________________________________________________________________________________________________
+package uncheckedException;
+
+public class ThrowDemo {
+
+	public void checkAge(int age) throws Exception {
+		if(age<=0)
+			throw new Exception("Age can not be negative");
+		else
+			System.out.println("Valid Age");
+	}
+	
+	public static void main(String[] args) {
+		
+		ThrowDemo obj= new ThrowDemo();
+		
+		try {
+			obj.checkAge(-9);
+		} catch (Exception e) {
+			System.out.println("Error Occured: "+ e.getMessage());
+		}
+	}
+}
+
+__________________________________________________________________________________________________
+
+Let's create Our own exception
+
+Custom Exception
+------------------------------------------------------------
+
+create class which extends Exception class you can create your constructor and pass message to parent class Constructor using Super Keyword.
+
+create To String method to print your message.
+_________________________________________________________________________________
+
+Let's Create our own exception use the same in diffrent class to throw the exception
+
+package com.simplilearn.customexception;
+
+
+public class AgeNotValidException extends Exception{
+
+	public AgeNotValidException(String message) {
+		super(message);//passing string message to parent class constructor
+	}
+	
+	
+}
+
+
+
+package com.simplilearn.customexception;
+
+public class TestException {
+
+	public void validate(int age) throws AgeNotValidException {
+		if(age<18)
+			throw new AgeNotValidException("You are not eligible for vote");
+		else
+			System.out.println("Valid for vote");
+	}
+	
+	public static void main(String[] args) {
+		
+		TestException obj= new TestException();
+		try {
+			obj.validate(6);
+			
+		} catch (AgeNotValidException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			System.out.println("Check after some years");
+		}
+	}
+}
+
+________________________________________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

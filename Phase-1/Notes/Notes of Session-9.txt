@@ -1,0 +1,424 @@
+Queue: insert element from one end and delete from another end
+
+Queue is interface --> implemented class is PriorityQueue.
+
+package com.simplilearn.queue;
+
+import java.util.PriorityQueue;
+
+public class QueueDemo1 {
+
+	public static void main(String[] args) {
+		
+		PriorityQueue<Integer> pq= new PriorityQueue<Integer>();
+		
+		pq.add(10);
+		pq.add(20);
+		pq.add(30);
+		
+		System.out.println("Queue: "+pq);
+		
+		//printing top element
+		System.out.println(pq.peek());
+		System.out.println(pq.poll());
+		
+		System.out.println("After poll "+pq);
+	}
+}
+
+____________________________________________________________________________________________
+
+Deque--- insertion and deletion happened from both the ends.
+
+Linked list implementing Deque interface
+
+package com.simplilearn.queue;
+
+import java.util.Deque;
+import java.util.LinkedList;
+
+public class QueueDemo2 {
+
+	public static void main(String[] args) {
+		
+		Deque<Integer> dq= new LinkedList<Integer>();
+		
+		dq.add(10);
+		dq.add(20);
+		dq.add(30);
+		dq.add(40);
+		
+		dq.pollFirst();
+		System.out.println("after poll first "+dq);
+		
+		dq.pollLast();
+		System.out.println("After poll last "+dq);
+		dq.add(50);
+		System.out.println("After add "+dq);
+		dq.addFirst(90);
+		System.out.println("After add first "+dq);
+		
+	}
+}
+
+______________________________________________________________________________________________________
+Set : remove deplicates
+
+Hashset: remove duplicates and not maintain any insertion order
+
+Linked HashSet: remove duplicates and maintain insertion order
+
+Treeset: remove duplicates and sort the elements in alphabetical order.
+
+(These classes allow null value but when you give null in treeset it will throw nullpinter exception as it can't adjust null values for sorting)
+
+package com.simplilearn.set;
+
+import java.util.HashSet;
+
+public class HashSetDemo {
+
+	public static void main(String[] args) {
+		
+		HashSet<String> set= new HashSet<String>();
+		
+		set.add("sonam");
+		set.add("pooja");
+		set.add("pooja");
+		set.add(null);
+		set.add("krishna");
+		set.add("krishna");
+		
+		System.out.println(set);
+		
+		set.remove("pooja");
+		
+		System.out.println(set);
+		
+		System.out.println("Size of set: "+set.size());
+	}
+}
+
+
+____________________________________________________________________________________________________
+
+package com.simplilearn.set;
+
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+
+public class LinkedHashSetDemo {
+
+	public static void main(String[] args) {
+		
+		LinkedHashSet<String> set= new LinkedHashSet<String>();
+		
+		set.add("sonam");
+		set.add("pooja");
+		set.add(null);
+		set.add("krishna");
+
+		System.out.println(set);
+		
+		set.remove("pooja");
+		
+		System.out.println(set);
+		
+		System.out.println("Size of set: "+set.size());
+	}
+}
+
+
+__________________________________________________________________________________________________
+
+package com.simplilearn.set;
+
+import java.util.HashSet;
+import java.util.TreeSet;
+
+public class TreeSetDemo {
+
+	public static void main(String[] args) {
+		
+		TreeSet<String> set= new TreeSet<String>();
+		
+		set.add("sonam");
+		set.add("pooja");
+		set.add("krishna");
+
+		System.out.println(set);
+		
+		set.remove("pooja");
+		
+		System.out.println(set);
+		
+		System.out.println("Size of set: "+set.size());
+	}
+}
+
+___________________________________________________________________________________________________
+
+Map: always stores values in key -value pair
+
+you can give any datatype for key and any datatype for value.
+
+put method is used to store elements in map.
+
+Hash map can accept one null key and multiple null values.
+it will remove duplicates based on Key
+
+__________________________________________________________________________________
+
+package com.simplilearn.map;
+
+import java.util.HashMap;
+
+public class HashMapDemo {
+
+	public static void main(String[] args) {
+		
+		//key integer and value is string
+		HashMap<Integer, String> map = new HashMap<Integer, String>();
+		
+		map.put(1, "Sonam"); //inserted elements in map
+		map.put(2, "ashray");
+		map.put(3, "gunjan");
+		map.put(4, "balaji");
+		
+		System.out.println(map); //print map
+		
+		System.out.println("size of map: "+map.size());//get the size of map
+		
+		//get value by key
+		System.out.println("Value of index 3 "+map.get(3));
+		//need to pass key in get method so it will return value based on key
+		map.remove(3);
+		System.out.println("After remove: "+map);
+		map.clear();//this will make my map empty
+		System.out.println(map);
+	}
+}
+___________________________________________________________________________________________________
+
+HashTable---- the main diffrence between hashmap and hashtable is 
+
+methods in hashmap are not synchronized, no thread safety, faster than hashtable
+methods in hashtable are synchronized, thread safe, slower than hashmap 
+
+HashTable not allow any null keys and any null values.
+
+package com.simplilearn.map;
+
+import java.util.HashMap;
+import java.util.Hashtable;
+
+public class HashTableDemo {
+
+	public static void main(String[] args) {
+		
+		Hashtable<Integer, String> map =new Hashtable<Integer, String>();
+		
+		map.put(1, "Sonam"); //inserted elements in map
+		map.put(21, "ashray");
+		map.put(13, "gunjan");
+		map.put(4, "balaji");
+	//	map.put(null, null); not allowed
+		
+		System.out.println(map); //print map
+		
+		System.out.println("size of map: "+map.size());//get the size of map
+		
+		//get value by key
+		System.out.println("Value of index 3 "+map.get(3));
+		//need to pass key in get method so it will return value based on key
+		map.remove(4);
+		System.out.println("After remove: "+map);
+		map.clear();//this will make my map empty
+		System.out.println(map);
+	}
+}
+
+________________________________________________________________________________________________
+
+Treemap: Sort element on the basis of key.
+
+
+package com.simplilearn.map;
+
+import java.util.HashMap;
+import java.util.TreeMap;
+
+public class TreeMapDemo {
+
+	public static void main(String[] args) {
+		
+		TreeMap<Integer, String> map =new TreeMap<Integer, String>();
+		
+		map.put(21, "Sonam"); //inserted elements in map
+		map.put(2, "ashray");
+		map.put(32, "gunjan");
+		map.put(14, "balaji");
+		
+		System.out.println(map); //print map
+		
+		System.out.println("size of map: "+map.size());//get the size of map
+		
+		//get value by key
+		System.out.println("Value of index 3 "+map.get(3));
+		//need to pass key in get method so it will return value based on key
+		map.remove(3);
+		System.out.println("After remove: "+map);
+		map.clear();//this will make my map empty
+		System.out.println(map);
+	}
+}
+
+________________________________________________________________________________________________
+
+Strings
+------------------------------------
+
+strings are immutable-- once it is created, you can not change 
+
+if you try to chnage it, it will create new object everytime
+
+if you want to make string mutable then user stringBuilder or String Buffer class
+
+stringBuilder class methods are not synchronized
+
+Stringbuffer class methods are synchronized.
+
+____________________________________________________________________________________________
+package com.simplilearn.string;
+
+public class StringDemo {
+
+	public static void main(String[] args) {
+		
+		String s1="Hello";
+		String s2= new String("Hello world");
+		
+		System.out.println(s1);
+		System.out.println(s2);
+	}
+}
+ 
+_____________________________________________________________________________________________
+package com.simplilearn.string;
+
+public class StringMethods {
+
+	public static void main(String[] args) {
+		
+		String s1= "hello world";
+		System.out.println("String length: "+s1.length());
+		
+		System.out.println("Character at index 4: "+ s1.charAt(4));
+		System.out.println("String contains world? "+s1.contains("world"));
+		
+		System.out.println("Uppercase: "+s1.toUpperCase());
+		System.out.println("lower case: "+s1.toLowerCase());
+		
+		System.out.println(s1.substring(6, 11));
+		
+		System.out.println(s1.compareTo("hello world"));
+		System.out.println(s1.equals("hello World"));
+		
+		System.out.println(s1.equalsIgnoreCase("Hello World"));
+		
+		
+	}
+}
+
+
+________________________________________________________________________________________________
+
+package com.simplilearn.string;
+
+public class StringBuilderDemo {
+
+	public static void main(String[] args) {
+		
+		StringBuilder str1= new StringBuilder("Hello World");
+		System.out.println(str1);
+		
+		str1.append("Welcome to JAVA World");
+		System.out.println(str1);
+		
+		System.out.println(str1.length());
+		System.out.println(str1.delete(11,21));
+		
+		System.out.println(str1.replace(0, 5, "Users"));
+		
+		System.out.println(str1.reverse());
+	}
+}
+
+______________________________________________________________________________________________
+package com.simplilearn.string;
+
+public class StringBufferDemo {
+
+	public static void main(String[] args) {
+		
+		StringBuffer str1= new StringBuffer("Hello World");
+		System.out.println(str1);
+		
+		str1.append("Welcome to JAVA World");
+		System.out.println(str1);
+		
+		System.out.println(str1.length());
+		System.out.println(str1.delete(11,21));
+		
+		System.out.println(str1.replace(0, 5, "Users"));
+		
+		System.out.println(str1.reverse());
+	}
+}
+
+_______________________________________________________________________________________________
+
+if you want to convert your string to stringbuilder and stringbuffer then check below code
+
+package com.simplilearn.string;
+
+public class Conversion {
+
+	public static void main(String[] args) {
+		
+		String s1= new String("Hello World");
+		
+		//convert to stringBuffer
+		
+		StringBuffer str1= new StringBuffer(s1);
+		
+		//convert to stringBuilder
+		
+		StringBuilder str2= new StringBuilder(s1);
+		
+		System.out.println("String "+s1);
+		System.out.println("String  Builder "+ str2);
+		System.out.println("String Buffer "+ str1);
+		
+		//opposite convertion
+		
+		//Stringbuilder to string
+		String newS1= str2.toString();
+		String newS2= str1.toString();//string buffer to string
+	}
+}
+_________________________________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+
